@@ -1,10 +1,20 @@
 import { Component } from '@angular/core';
 
+import { LoginService } from './_services';
+import { User } from './_models';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'teste-biz';
+  user: User;
+
+  constructor(private loginService: LoginService) {
+    this.loginService.user.subscribe(x => this.user = x);
+  }
+
+  public logout() {
+    this.loginService.logout();
+  }
 }

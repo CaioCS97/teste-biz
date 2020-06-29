@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://sandbox-code.biz.com.br'
+  apiUrl: 'http://192.168.15.39:8094/sandbox-code.biz.com.br',
 };
 
 /*

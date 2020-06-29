@@ -7,7 +7,11 @@ import { AlertComponent } from './_components';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home';
-import { ErrorInterceptor, JwtInterceptor, HeaderInterceptor } from './_helpers';
+import {
+  ErrorInterceptor,
+  JwtInterceptor,
+  HeaderInterceptor,
+} from './_helpers';
 
 @NgModule({
   imports: [
@@ -15,18 +19,14 @@ import { ErrorInterceptor, JwtInterceptor, HeaderInterceptor } from './_helpers'
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
-  declarations: [
-    AppComponent,
-    AlertComponent,
-    HomePageComponent
-  ],
+  declarations: [AppComponent, AlertComponent, HomePageComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

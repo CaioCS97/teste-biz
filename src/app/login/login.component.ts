@@ -5,8 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { LoginService, AlertService } from '../_services';
-import { RegexConstants } from './../_helpers/regex.constants';
-import { LoginConstants } from './../_helpers/login.constants';
+import { LoginConstants, RegexConstants } from './../_helpers';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {

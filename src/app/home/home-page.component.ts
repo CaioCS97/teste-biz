@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 
-// import { Person } from '@app/_models';
-import { User } from '../_models/';
+import { Person } from '../_models/';
 import { LoginService } from '../_services';
 
 @Component({ templateUrl: 'home-page.component.html' })
 export class HomePageComponent {
-    user: User;
+  public person: Person;
 
-    constructor(private loginService: LoginService) {
-        this.user = this.loginService.userValue;
-    }
+  constructor(private loginService: LoginService) {
+    this.person = this.loginService.userValue.person;
+  }
 }

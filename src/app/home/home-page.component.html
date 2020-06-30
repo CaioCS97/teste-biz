@@ -1,7 +1,12 @@
 <div class="p-4">
   <div class="container">
-      <h1>Hi {{user.access_token}}!</h1>
-      <p>You're logged in with Angular 9!!</p>
-      <p><a routerLink="/users">Manage Users</a></p>
+    <h1>Olá, {{ person.Name }}!</h1>
+    <p>Confira seus dados</p>
+    <p>Nome de Cadastro: {{ person.Name }}</p>
+    <p>CPF: {{ person.Cpf }}</p>
+    <p>Data de Nascimento: {{ person.Birthday }}</p>
+    <p>Sexo: {{ person.Genre }}</p>
+    <p>Estado Civil: {{ person.MaritalState }}</p>
+    <p>Telefone: {{ person.Phone }}</p>
   </div>
 </div>

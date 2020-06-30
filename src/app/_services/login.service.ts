@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
+
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -24,59 +25,45 @@ export class LoginService {
     return this.userSubject.value;
   }
 
-  loginEmail(email, password, grantType, platformId, partnerId) {
-    const headers = new HttpHeaders({
-      Authorization: 'TESTE',
-      'Content-Type': 'TESTE-II',
-    });
-    // .set('Authorization', 'TESTE')
-    // .append('Content-Type', 'application/json')
-    // .append('Access-Control-Allow-Origin', '*')
-    // .append('Access-Control-Allow-Headers', 'X-Requested-With');
-    return this.http
-      .post<User>(
-        `${environment.apiUrl}/authentication/Login`,
-        {
-          email,
-          password,
-          grantType,
-          platformId,
-          partnerId,
-        }
-        // {
-        //   headers,
-        // }
-      )
-      .pipe(
-        map((user) => {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.userSubject.next(user);
-          console.log('aqui');
-
-          return user;
-        })
-      );
-  }
-
-  loginDocument(document, password, grantType) {
+  public loginEmail(email, password, grantType, platformId, partnerId) {
     return this.http
       .post<User>(`${environment.apiUrl}/authentication/Login`, {
-        document,
+        email,
         password,
         grantType,
+        platformId,
+        partnerId,
       })
       .pipe(
         map((user) => {
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);
-          console.log('aqui');
 
           return user;
         })
       );
   }
 
-  logout() {
+  public loginDocument(document, password, grantType, platformId, partnerId) {
+    return this.http
+      .post<User>(`${environment.apiUrl}/authentication/Login`, {
+        document,
+        password,
+        grantType,
+        platformId,
+        partnerId,
+      })
+      .pipe(
+        map((user) => {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.userSubject.next(user);
+
+          return user;
+        })
+      );
+  }
+
+  public logout() {
     localStorage.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/account/login']);

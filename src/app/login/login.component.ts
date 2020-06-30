@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 
 import { LoginService, AlertService } from '../_services';
 import { RegexConstants } from './../_helpers/regex.constants';
+import { LoginConstants } from './../_helpers/login.constants';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -52,19 +53,17 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    if (this.user) {
+    if (this.user.match(RegexConstants.EMAIL_REGEX)) {
       this.email = this.user;
       this.grantType = 'email';
-
-      console.log('email => ', this.email);
 
       this.loginService
         .loginEmail(
           this.email,
           this.f.password.value,
           this.grantType,
-          '3351746b-0edd-457e-9ce0-7ff55e6d93d4',
-          '3351746b-0edd-457e-9ce0-7ff55e6d93d4'
+          LoginConstants.PARTNER_ID,
+          LoginConstants.PLATFORM_ID
         )
         .pipe(first())
         .subscribe(
@@ -80,10 +79,14 @@ export class LoginComponent implements OnInit {
       this.document = this.user;
       this.grantType = 'cpf';
 
-      console.log('cpf => ', this.document);
-
       this.loginService
-        .loginDocument(this.document, this.f.password.value, this.grantType)
+        .loginDocument(
+          this.document,
+          this.f.password.value,
+          this.grantType,
+          LoginConstants.PARTNER_ID,
+          LoginConstants.PARTNER_ID
+        )
         .pipe(first())
         .subscribe(
           (data) => {

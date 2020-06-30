@@ -14,12 +14,10 @@ export class HeaderInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const headers = req.headers.set('Content-Type', 'application/json');
-    // .set('Ocp-Apim-Subscription-Key', '3313a0e8524d43188461615287627ee9');
-    // headers = req.headers.set('TESTE', 'application/json');
-    // headers.append('TESTE', '3313a0e8524d43188461615287627ee9');
+    const headers = req.headers
+      .set('Content-Type', 'application/json')
+      .set('Ocp-Apim-Subscription-Key', '3313a0e8524d43188461615287627ee9');
     const authReq = req.clone({ headers });
-    console.log(headers);
 
     return next.handle(authReq);
   }
